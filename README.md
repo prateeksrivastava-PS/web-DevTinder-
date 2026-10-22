@@ -8,3 +8,5 @@
 - adding npm install react-router for routing.
 
 - add a footer 
+
+- adding npm install axios  for api call
