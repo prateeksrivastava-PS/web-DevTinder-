@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../Utils/userSlice";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { base_url } from "../Utils/constants";
 
 const Login = () => {
-  const [emailId, setEmailId] = useState("saurabh.srivastva@gmail.com");
+  const [emailId, setEmailId] = useState("Shivansh@gmail.com");
   const [password, setPassword] = useState("Kobe@2001");
-  const dispatch= useDispatch();
-  const navigate= useNavigate();
+  // const [error, setError] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handelLogin = async () => {
     try {
-      const res = await fetch(base_url+"login", {
+      const res = await fetch(base_url + "login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,11 +25,18 @@ const Login = () => {
         }),
       });
       const data = await res.json();
-      // Saving the data using redux 
+      console.log("Backend response:", data);
+       console.log("errror", res.ok);
+      if (!res.ok) {
+        setError(data.message || "Invalid email or password");
+        return;
+      }
+      // Saving the data using redux
       dispatch(addUser(data));
       return navigate("/");
     } catch (err) {
-      console.log(err);
+      setError(err);
+      console.log("errror", err);
     }
   };
   return (
@@ -66,6 +74,7 @@ const Login = () => {
             </fieldset>
           </div>
           <div className="card-actions justify-center">
+            {/* <p className="text-red-50">{error}</p> */}
             <button className="btn btn-primary" onClick={handelLogin}>
               Login
             </button>
