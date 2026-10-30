@@ -1,7 +1,8 @@
 const UserCard = ({ users }) => {
+    const userList = Array.isArray(users) ? users : [users];
   return (
     <div className="flex flex-row justify-around">
-      {users.map((user) => (
+      {userList.map((user) => (
         <div key={user._id}>
           <div className="card bg-base-300 w-96 shadow-sm p-2  ">
             <figure>
@@ -11,6 +12,9 @@ const UserCard = ({ users }) => {
               <h2 className="card-title">
                 {user.firstName + " " + user.lastName}
               </h2>
+              <p>{user.age}</p>
+              <p>{user.gender}</p>
+              <p>{user.about}</p>
             </div>
 
             <div className="card-actions justify-center">

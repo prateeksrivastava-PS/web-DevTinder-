@@ -26,7 +26,7 @@ const Body = () => {
       } catch (err) {
         console.error("Error fetching user:", err);
 
-        if (err.response?.status === 401) {
+        if (err.response?.status === 401 || err.response?.status === 400) {
           navigate("/login", { replace: true });
         }
       }
