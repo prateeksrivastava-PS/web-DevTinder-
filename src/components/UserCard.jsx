@@ -1,7 +1,8 @@
 import axios from "axios";
 import { base_url } from "../Utils/constants";
 import { useDispatch } from "react-redux";
-import { removeConnections } from "../Utils/connectionSlice";
+import { removeUserFromFeed } from "../Utils/feedSlice";
+
 
 const UserCard = ({ users, preview = false }) => {
   const userList = Array.isArray(users) ? users : [users];
@@ -14,7 +15,7 @@ const UserCard = ({ users, preview = false }) => {
         {},
         { withCredentials: true },
       );
-      dispatch(removeConnections(id))
+      dispatch(removeUserFromFeed(id))
     } catch (err) {
       console.log("Full error:", err);
     }

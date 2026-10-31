@@ -19,7 +19,7 @@ const fetchFeed = async () => {
       withCredentials: true,
       params: {
         page: page,
-        limit: 2,
+        limit: 3,
       },
     });
 
